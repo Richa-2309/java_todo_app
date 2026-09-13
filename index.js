@@ -84,21 +84,20 @@ public class Todo {
         this.completed = completed;
     }
 }
-```
 
-### Important observation
 
-Your `title` field currently has **no getter or setter** because you commented them out:
+// ### Important observation
 
-```java
+// Your `title` field currently has **no getter or setter** because you commented them out:
+
+
 // public String getTitle() {
 //     return title;
 // }
-```
 
-So if your controller/service needs to access the title, you'll need:
+// So if your controller/service needs to access the title, you'll need:
 
-```java
+
 public String getTitle() {
     return title;
 }
