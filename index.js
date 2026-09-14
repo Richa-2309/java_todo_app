@@ -89,6 +89,9 @@ public class Todo {
 // ### Important observation
 
 // Your `title` field currently has **no getter or setter** because you commented them out:
+// ### Important observation
+
+// Your `title` field currently has **no getter or setter** because you commented them out:
 
 
 // public String getTitle() {
@@ -99,6 +102,10 @@ public class Todo {
 
 
 public String getTitle() {
+    return title;
+}
+
+public String putTitle() {
     return title;
 }
 
