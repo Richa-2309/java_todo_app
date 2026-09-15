@@ -1,1 +1,46 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+</head>
+
+<body>
+
+    <h1>Todo List</h1>
+
+    <input type="text" id="todoInput" placeholder="Enter todo">
+    <button onclick="addTodo()">Add Todo</button>
+
+    <ul id="todoList"></ul>
+
+    <script>
+        function addTodo() {
+            const input = document.getElementById("todoInput");
+            const todo = input.value.trim();
+
+            if (todo === "") {
+                return;
+            }
+
+            const li = document.createElement("li");
+
+            li.innerHTML = `
+                ${todo}
+                <button onclick="deleteTodo(this)">Delete</button>
+            `;
+
+            document.getElementById("todoList").appendChild(li);
+
+            input.value = "";
+        }
+
+        function deleteTodo(button) {
+            button.parentElement.remove();
+        }
+    </script>
+
+</body>
+</html>
