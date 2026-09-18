@@ -21,7 +21,7 @@ const secondMiddleware = (req, res, next) => {
     next();
 };
 
-// Root Routes
+
 server.get("/", (req, res) => {
     res.send("GET request is working");
 });
