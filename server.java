@@ -1,14 +1,24 @@
-package org.example.springbootintro;
+package com.example.music;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-//java todo server file
-
 @SpringBootApplication
-public class SpringbootintroApplication {
+public class MusicSystemApplication {
 
-    
+    public static void main(String[] args) {
 
-    
+        SpringApplication.run(
+                MusicSystemApplication.class,
+                args
+        );
+
+        System.out.println(
+                "Music System Server Started!"
+        );
+
+        System.out.println(
+                "Server running at: http://localhost:8080"
+        );
+    }
 }
