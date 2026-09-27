@@ -27,15 +27,6 @@ This project is built to practice backend development with **Java Spring Boot** 
 git clone https://github.com/Richa-2309/java_todo_app.git
 ```
 
-### Run the application
-
-Open the project in your preferred Java IDE and run the Spring Boot application.
-
-The application will start on the default Spring Boot port:
-
-```text
-http://localhost:8080
-```
 
 ## Future Improvements
 
@@ -46,6 +37,4 @@ http://localhost:8080
 * Add validation
 * Add authentication and authorization
 
-## License
 
-This project is for learning and practice purposes.
