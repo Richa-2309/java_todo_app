@@ -94,9 +94,9 @@ public class Todo {
 // Your `title` field currently has **no getter or setter** because you commented them out:
 
 
-// public String getTitle() {
-//     return title;
-// }
+public String getTitle() {
+    return title;
+}
 
 // So if your controller/service needs to access the title, you'll need:
 
