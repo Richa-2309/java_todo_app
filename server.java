@@ -1,24 +1,89 @@
-package com.example.music;
+package com.example.music.model;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+public class Song {
 
-@SpringBootApplication
-public class MusicSystemApplication {
+    private int id;
+    private String title;
+    private String artist;
+    private String album;
+    private String image;
+    private String file;
+    private String duration;
 
-    public static void main(String[] args) {
+    public Song() {
+    }
 
-        SpringApplication.run(
-                MusicSystemApplication.class,
-                args
-        );
+    public Song(
+            int id,
+            String title,
+            String artist,
+            String album,
+            String image,
+            String file,
+            String duration
+    ) {
+        this.id = id;
+        this.title = title;
+        this.artist = artist;
+        this.album = album;
+        this.image = image;
+        this.file = file;
+        this.duration = duration;
+    }
 
-        System.out.println(
-                "Music System Server Started!"
-        );
+    public int getId() {
+        return id;
+    }
 
-        System.out.println(
-                "Server running at: http://localhost:8080"
-        );
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public String getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 }
