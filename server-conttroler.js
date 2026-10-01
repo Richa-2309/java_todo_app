@@ -6,7 +6,10 @@ const server = express();
 // Built-in Middleware
 // ===============================
 
-// Read JSON data from request body
+
+
+
+
 server.use(express.json());
 
 // Serve static files from public folder
