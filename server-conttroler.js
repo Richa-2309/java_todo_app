@@ -190,6 +190,20 @@ server.use((err, req, res, next) => {
     res.status(500).json({
         message: "Something went wrong"
     });
+    server.use((err, req, res, next) => {
+
+    console.log("Error:", err.message);
+
+    res.status(500).json({
+        message: "Something went wrong"
+    });
+        server.use((err, req, res, next) => {
+
+    console.log("Error:", err.message);
+
+    res.status(500).json({
+        message: "Something went wrong"
+    });
 
 });
 
