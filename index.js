@@ -1,116 +1,225 @@
+```javascript
+// ==========================================================
+// TODO APPLICATION - JAVASCRIPT
+// ==========================================================
 
-package com.example.todo.model;
+// Backend API URL
+const API_URL = "http://localhost:8080/todos";
 
-/**
- * Represents a Todo item.
+
+// ==========================================================
+// LOAD ALL TODOS
+// ==========================================================
+
+/*
+ * This function gets all Todo items from the backend
+ * and displays them on the webpage.
  */
-public class Todo {
+async function loadTodos() {
 
-    // Unique identifier for the todo
-    private Integer id;
+    try {
 
-    // Short title of the todo
-    private String title;
+        // Send GET request to Spring Boot backend
+        const response = await fetch(API_URL);
 
-    // Detailed description of the todo
-    private String description;
+        // Check if the server returned a successful response
+        if (!response.ok) {
+            throw new Error("Failed to fetch todos");
+        }
 
-    // Indicates whether the todo is completed
-    private Boolean completed;
+        // Convert the response into JavaScript object/array
+        const todos = await response.json();
 
-    /**
-     * Default constructor.
-     */
-    public Todo() {
-    }
+        // Display all todos on the webpage
+        displayTodos(todos);
 
-    /**
-     * Creates a Todo with all properties.
-     *
-     * @param id          unique todo identifier
-     * @param title       todo title
-     * @param description todo description
-     * @param completed   completion status
-     */
-    public Todo(Integer id, String title, String description, Boolean completed) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.completed = completed;
-    }
+    } catch (error) {
 
-    /**
-     * Returns the todo ID.
-     *
-     * @return todo ID
-     */
-    public Integer getId() {
-        return id;
-    }
+        // Print error in browser console
+        console.error("Error loading todos:", error);
 
-    /**
-     * Returns the todo description.
-     *
-     * @return todo description
-     */
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * Updates the todo description.
-     *
-     * @param description new todo description
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * Returns the completion status.
-     *
-     * @return true if completed, otherwise false
-     */
-    public Boolean getCompleted() {
-        return completed;
-    }
-
-    /**
-     * Updates the completion status.
-     *
-     * @param completed new completion status
-     */
-    public void setCompleted(Boolean completed) {
-        this.completed = completed;
+        // Show error message to the user
+        alert("Unable to load todos");
     }
 }
 
 
-// ### Important observation
+// ==========================================================
+// DISPLAY TODOS
+// ==========================================================
 
-// Your `title` field currently has **no getter or setter** because you commented them out:
-// ### Important observation
+/*
+ * This function displays all Todo items inside
+ * the HTML element with id="todoList".
+ */
+function displayTodos(todos) {
 
-// Your `title` field currently has **no getter or setter** because you commented them out:
+    // Get the Todo list container from HTML
+    const todoList = document.getElementById("todoList");
+
+    // Remove existing Todo items before displaying new ones
+    todoList.innerHTML = "";
 
 
-public String getTitle() {
-    return title;
+    // Loop through every Todo
+    todos.forEach(function(todo) {
+
+        // Create a new div for each Todo
+        const todoItem = document.createElement("div");
+
+        // Add CSS class to the Todo item
+        todoItem.classList.add("todo-item");
+
+
+        // Create the HTML content for the Todo
+        todoItem.innerHTML = `
+            <h3>${todo.title}</h3>
+
+            <p>${todo.description || ""}</p>
+
+            <p>
+                Status:
+                <strong>
+                    ${todo.completed ? "Completed" : "Pending"}
+                </strong>
+            </p>
+
+            <button onclick="toggleTodo(${todo.id}, ${todo.completed})">
+                ${todo.completed ? "Mark Pending" : "Complete"}
+            </button>
+
+            <button onclick="deleteTodo(${todo.id})">
+                Delete
+            </button>
+
+            <hr>
+        `;
+
+
+        // Add the Todo item to the webpage
+        todoList.appendChild(todoItem);
+    });
 }
 
-// So if your controller/service needs to access the title, you'll need:
+
+// ==========================================================
+// ADD TODO
+// ==========================================================
+
+/*
+ * This function creates a new Todo.
+ *
+ * It gets the title and description from the HTML form
+ * and sends them to the Spring Boot backend.
+ */
+async function addTodo() {
+
+    // Get the title entered by the user
+    const title = document.getElementById("title").value;
+
+    // Get the description entered by the user
+    const description =
+        document.getElementById("description").value;
 
 
-public String getTitle() {
-    return title;
+    // Check whether the title is empty
+    if (title.trim() === "") {
+
+        // Show validation message
+        alert("Please enter a Todo title");
+
+        // Stop the function
+        return;
+    }
+
+
+    // Create a Todo object
+    const todo = {
+
+        title: title,
+
+        description: description,
+
+        // New Todo is incomplete by default
+        completed: false
+    };
+
+
+    try {
+
+        // Send POST request to create a new Todo
+        const response = await fetch(API_URL, {
+
+            // HTTP method
+            method: "POST",
+
+            // Tell backend that we are sending JSON
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            // Convert JavaScript object into JSON
+            body: JSON.stringify(todo)
+        });
+
+
+        // Check whether Todo was successfully created
+        if (!response.ok) {
+            throw new Error("Failed to add todo");
+        }
+
+
+        // Clear the title input
+        document.getElementById("title").value = "";
+
+        // Clear the description input
+        document.getElementById("description").value = "";
+
+
+        // Load the updated Todo list
+        loadTodos();
+
+    } catch (error) {
+
+        // Print error in console
+        console.error("Error adding todo:", error);
+
+        // Show error message
+        alert("Unable to add todo");
+    }
 }
 
-public String putTitle() {
-    return title;
-}
 
-public void setTitle(String title) {
-    this.title = title;
-}
+// ==========================================================
+// UPDATE TODO STATUS
+// ==========================================================
+
+/*
+ * This function changes the Todo status.
+ *
+ * If the Todo is completed:
+ *      true -> false
+ *
+ * If the Todo is pending:
+ *      false -> true
+ */
+async function toggleTodo(id, currentStatus) {
+
+    // Create updated Todo object
+    const updatedTodo = {
+
+        // Reverse the current status
+        completed: !currentStatus
+    };
 
 
+    try {
+
+        // Send PUT request to update the Todo
+        const response = await fetch(`${API_URL}/${id}`, {
+
+            // HTTP method used for updating data
+            method: "PUT",
+
+            // Tell backend that we are sending JSON
+```
