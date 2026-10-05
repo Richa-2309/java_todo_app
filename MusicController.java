@@ -56,6 +56,9 @@ public class MusicController {
     }
 
     // DELETE song
+    //api for removing any song
+
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteSong(
             @PathVariable int id
