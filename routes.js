@@ -17,14 +17,6 @@ const {
 // Search songs by keyword
 router.get("/search", searchSongs);
 
-// Get music statistics
-router.get("/stats", getSongStats);
-
-// Get songs by artist
-router.get("/artist/:artist", getSongsByArtist);
-
-// Get all songs
-router.get("/", getSongs);
 
 // Add a new song
 router.post("/", addSong);
