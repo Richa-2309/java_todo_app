@@ -19,13 +19,6 @@ A simple **Todo application built with Java and Spring Boot**. This project demo
 
 This project is built to practice backend development with **Java Spring Boot** and database integration. It provides a simple foundation for creating and managing todo items through APIs.
 
-## Getting Started
-
-### Clone the repository
-
-```bash
-git clone https://github.com/Richa-2309/java_todo_app.git
-```
 
 
 ## Future Improvements
