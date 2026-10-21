@@ -40,14 +40,7 @@ This project is built to practice backend development with **Java Spring Boot** 
 * Mark todo as completed
 * Add validation
 * Add authentication and authorization
-* * ## Future Improvements
 
-* Update todo
-* Get all todos
-* Get todo by ID
-* Mark todo as completed
-* Add validation
-* Add authentication and authorization
 
 
 * ## Future Improvements
