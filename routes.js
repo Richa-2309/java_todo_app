@@ -32,6 +32,8 @@ router.get("/:id", getSongById);
 // Define a PUT route to update an existing song by its ID
 // The updated details are sent in the request body
 // Example: PUT /5
+//let sum=0
+
 router.put("/:id", updateSong);
 
 // Define a DELETE route to remove a song by its ID
