@@ -1,35 +1,42 @@
-
+// Import the Express framework
 const express = require("express");
+
+// Create a new router to define music-related API routes
 const router = express.Router();
 
-// Import controller functions
+// Import the required controller functions from musicController.js
 const {
-    getSongs,
-    getSongById,
-    addSong,
-    updateSong,
-    deleteSong,
-    searchSongs,
-    getSongsByArtist,
-    getSongStats
+    getSongs,          // Get the list of all songs
+    getSongById,       // Get a specific song using its ID
+    addSong,           // Add a new song to the music collection
+    updateSong,        // Update the details of an existing song
+    deleteSong,        // Delete a song using its ID
+    searchSongs,       // Search songs using a keyword
+    getSongsByArtist,  // Get all songs by a specific artist
+    getSongStats       // Get statistics about the music collection
 } = require("../controllers/musicController");
 
-// Search songs by keyword
+// Define a GET route to search songs by keyword
+// Example: GET /search?keyword=summer
 router.get("/search", searchSongs);
 
-
-// Add a new song
+// Define a POST route to add a new song
+// The request body contains the new song's details
+// Example: POST /
 router.post("/", addSong);
 
-// Get a song by ID
+// Define a GET route to retrieve a song by its ID
+// Example: GET /5
 router.get("/:id", getSongById);
 
-// Update a song by ID
+// Define a PUT route to update an existing song by its ID
+// The updated details are sent in the request body
+// Example: PUT /5
 router.put("/:id", updateSong);
 
-// Delete a song by ID
+// Define a DELETE route to remove a song by its ID
+// Example: DELETE /5
 router.delete("/:id", deleteSong);
 
-// Export router
+// Export the router so it can be used in the main application
 module.exports = router;
-
